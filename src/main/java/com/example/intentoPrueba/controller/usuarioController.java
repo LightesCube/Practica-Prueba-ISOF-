@@ -37,4 +37,21 @@ public class usuarioController {
     public List<usuario> obtenerUsuariosConMasSeguidores() {
         return usuarioService.obtenerUsuariosConMasSeguidores();
     }
+
+    @GetMapping("/ultimos-conectados")
+    public List<usuario> ultimosConectados() {
+        return usuarioService.obtenerUltimosConectados();
+    }
+
+    @GetMapping("/mas-populares")
+    public List<usuario> masPopulares() {
+        return usuarioService.obtenerUsuariosMasPopulares();
+    }
+
+    @GetMapping("/inactivos-mas-seguidos")
+    public List<usuario> inactivosMasSeguidos() {
+        return usuarioService.obtenerInactivosMasSeguidos();
+    }
+
 }
+

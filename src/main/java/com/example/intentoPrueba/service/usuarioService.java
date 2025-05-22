@@ -144,4 +144,42 @@ public class usuarioService {
                 .filter(u -> u.getCantidadSeguidores() == maxSeguidores)
                 .collect(Collectors.toList());
     }
+    // 4. Últimos 10 conectados
+    public List<usuario> obtenerUltimosConectados() {
+        return usuarios.stream()
+                .sorted(Comparator.comparing(usuario::getUltimaConexion).reversed())
+                .limit(10)
+                .collect(Collectors.toList());
+    }
+
+    // 5. Usuario(s) más populares
+    public List<usuario> obtenerUsuariosMasPopulares() {
+        int maxSeguidores = usuarios.stream()
+                .mapToInt(usuario::getCantidadSeguidores)
+                .max()
+                .orElse(0);
+
+        return usuarios.stream()
+                .filter(u -> u.getCantidadSeguidores() == maxSeguidores)
+                .collect(Collectors.toList());
+    }
+
+    // 6. Usuario(s) inactivos con más seguidores
+    public List<usuario> obtenerInactivosMasSeguidos() {
+        LocalDate corte = LocalDate.of(2019, 10, 17);
+
+        List<usuario> inactivos = usuarios.stream()
+                .filter(u -> u.getUltimaConexion().isBefore(corte))
+                .collect(Collectors.toList());
+
+        int max = inactivos.stream()
+                .mapToInt(usuario::getCantidadSeguidores)
+                .max()
+                .orElse(0);
+
+        return inactivos.stream()
+                .filter(u -> u.getCantidadSeguidores() == max)
+                .collect(Collectors.toList());
+    }
+
 }
