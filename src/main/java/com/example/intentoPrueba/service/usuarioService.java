@@ -113,7 +113,7 @@ public class usuarioService {
                 .collect(Collectors.toList());
     }
 
-    // 2. Usuarios que siguen a al menos la mitad de inactivos
+    // 2. Usuarios que siguen a muchos inactivos
     public List<usuario> obtenerUsuariosConMuchosInactivosSeguidos() {
         LocalDate corte = LocalDate.of(2019, 10, 17);
 
@@ -133,7 +133,7 @@ public class usuarioService {
                 .collect(Collectors.toList());
     }
 
-    // 3. Usuario(s) con más seguidores
+    // 3. Usuarios con más seguidores
     public List<usuario> obtenerUsuariosConMasSeguidores() {
         int maxSeguidores = usuarios.stream()
                 .mapToInt(usuario::getCantidadSeguidores)
@@ -144,6 +144,7 @@ public class usuarioService {
                 .filter(u -> u.getCantidadSeguidores() == maxSeguidores)
                 .collect(Collectors.toList());
     }
+
     // 4. Últimos 10 conectados
     public List<usuario> obtenerUltimosConectados() {
         return usuarios.stream()
@@ -152,7 +153,7 @@ public class usuarioService {
                 .collect(Collectors.toList());
     }
 
-    // 5. Usuario(s) más populares
+    // 5. Más populares
     public List<usuario> obtenerUsuariosMasPopulares() {
         int maxSeguidores = usuarios.stream()
                 .mapToInt(usuario::getCantidadSeguidores)
@@ -164,7 +165,7 @@ public class usuarioService {
                 .collect(Collectors.toList());
     }
 
-    // 6. Usuario(s) inactivos con más seguidores
+    // 6. Inactivos con más seguidores
     public List<usuario> obtenerInactivosMasSeguidos() {
         LocalDate corte = LocalDate.of(2019, 10, 17);
 
@@ -181,5 +182,4 @@ public class usuarioService {
                 .filter(u -> u.getCantidadSeguidores() == max)
                 .collect(Collectors.toList());
     }
-
 }
